@@ -1,0 +1,101 @@
+{
+  "name": "remote",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "nx-micro-frontends-poc",
+  "sourceRoot": "apps/remote/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-architects/native-federation:build",
+      "options": {},
+      "configurations": {
+        "production": {
+          "target": "remote:esbuild:production"
+        },
+        "development": {
+          "target": "remote:esbuild:development",
+          "dev": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-architects/native-federation:build",
+      "options": {
+        "target": "remote:serve-original:development",
+        "rebuildDelay": 0,
+        "dev": true,
+        "port": 0
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": ":build"
+      }
+    },
+    "esbuild": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/apps/remote",
+        "index": "apps/remote/src/index.html",
+        "browser": "apps/remote/src/main.ts",
+        "polyfills": [
+          "zone.js",
+          "es-module-shims"
+        ],
+        "tsConfig": "apps/remote/tsconfig.app.json",
+        "assets": [
+          "apps/remote/src/favicon.ico",
+          "apps/remote/src/assets"
+        ],
+        "styles": [
+          "apps/remote/src/styles.css"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve-original": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "remote:esbuild:production"
+        },
+        "development": {
+          "buildTarget": "remote:esbuild:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4201
+      }
+    }
+  }
+}

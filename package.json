@@ -18,11 +18,13 @@
     "@angular/platform-browser-dynamic": "~17.1.0",
     "@angular/router": "~17.1.0",
     "@nx/angular": "18.0.8",
+    "es-module-shims": "^1.5.12",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
   },
   "devDependencies": {
+    "@angular-architects/native-federation": "^17.1.7",
     "@angular-devkit/build-angular": "~17.1.0",
     "@angular-devkit/core": "~17.1.0",
     "@angular-devkit/schematics": "~17.1.0",
