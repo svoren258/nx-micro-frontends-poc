@@ -36,7 +36,7 @@
       }
     },
     "esbuild": {
-      "executor": "@angular-devkit/build-angular:application",
+      "executor": "@nx/angular:application",
       "outputs": [
         "{options.outputPath}"
       ],
