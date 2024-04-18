@@ -39,6 +39,5 @@
       "extends": ["plugin:@nx/angular-template"],
       "rules": {}
     }
-  ],
-  "extends": ["./.eslintrc.base.json"]
+  ]
 }
